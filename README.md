@@ -5,7 +5,7 @@ Compatibility
 Edition | Verisons
 |-------|--------|
 Legacy  | 1.8.9 - 1.21.1
-Community | 1.21.4 - 26.x
+Community | 1.21.5 - 26.x
 Reloaded | 26.x
 
 
