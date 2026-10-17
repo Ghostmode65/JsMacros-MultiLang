@@ -52,7 +52,7 @@ jython can be enabled in Community and Reloaded, as an experimental over GraalPy
 - Prime (2000): max 52.10 ms; min 51.50 ms; average 51.71 ms
 - getBlock (4 chunks): max 235 ms; min 189 ms; average 211 ms
 
-*Not an actual representation for work loads.  <br>
+*Not an accurate representation for work loads.  <br>
 
 ## Credits <br>
 [WagYourTail](https://modrinth.com/mod/jsmacros-reloaded) original exentions<br>
