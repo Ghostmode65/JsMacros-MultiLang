@@ -1,0 +1,3 @@
+xyz.wagyourtail.jsmacros.luaj.LuajExtension
+xyz.wagyourtail.jsmacros.graal.python.PythonExtension
+xyz.wagyourtail.jsmacros.multilang.RubyProvider
