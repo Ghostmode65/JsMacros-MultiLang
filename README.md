@@ -1,7 +1,7 @@
 # JsMacros-MultiLang
 Lua, Python and Ruby all packed into one.
 
-Compatibility 
+Jsmacros Compatibility 
 Edition | Verisons
 |-------|--------|
 Legacy  | 1.8.9 - 1.21.1
@@ -19,3 +19,8 @@ JRuby `Java 17` | 9.4 | Ruby 3.1  <br> | |
 GraalPy can be enabled for legacy, as an experimental over jython.<br> | |
 [jython](https://github.com/jython/jython) | 2.7.2 | Python 2.7
 jython can be enabled in Community and Reloaded, as an experimental over GraalPy| |
+
+
+## Credits <br>
+[WagYourTail](https://modrinth.com/mod/jsmacros-reloaded) original exentions<br>
+[grepsedawk](https://modrinth.com/mod/jsmacros-reloaded) updated ruby<br>
