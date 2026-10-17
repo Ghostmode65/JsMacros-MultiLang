@@ -22,7 +22,7 @@ jython can be enabled in Community and Reloaded, as an experimental over GraalPy
 
 
 
-## Benmarks
+## Benchmarks
 
 [GraalJS | JavaScript] <br> 
 - Prime (2000): max 430 ms; min 393 ms; average 416 ms
