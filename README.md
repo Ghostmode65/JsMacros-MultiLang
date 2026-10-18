@@ -57,3 +57,6 @@ jython can be enabled in Community and Reloaded, as an experimental over GraalPy
 ## Credits <br>
 [WagYourTail](https://modrinth.com/mod/jsmacros-reloaded) original exentions<br>
 [grepsedawk](https://modrinth.com/mod/jsmacros-reloaded) updated ruby<br>
+
+## AI Usage
+OpenAI / ChatGPT-assisted development and debugging.<br>
