@@ -1,0 +1,11 @@
+.gradle/
+build/
+shared/build/
+legacy/build/
+community/build/
+reloaded/build/
+run/
+out/
+*.log
+.idea/
+*.iml

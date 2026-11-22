@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "jsmacros_multilang_adapter",
+  "version": "@version@-@target@",
+  "name": "JsMacros Multi-Language @title@ Adapter",
+  "description": "JsMacros @title@ integration for the shared language engines",
+  "environment": "client",
+  "entrypoints": @entrypoints@,
+  "mixins": ["jsmacros-multilang-@target@.mixins.json"],
+  "depends": {
+    "fabricloader": ">=@loader@",
+    "minecraft": "@minecraft@",
+    "java": ">=@java@",
+    "@coreId@": "@coreVersion@",
+    "jsmacros_multilang_jruby": "=@jrubyVersion@",
+    "jsmacros_multilang": "=@version@"
+  },
+  "breaks": {
+    "@otherCoreId@": "*"
+  },
+  "custom": {
+    "jsmacros_multilang:target": "@target@",
+    "jsmacros_multilang:jruby": "@jrubyVersion@",
+    "modmenu": {
+      "badges": ["library"],
+      "parent": "jsmacros_multilang"
+    }
+  }
+}

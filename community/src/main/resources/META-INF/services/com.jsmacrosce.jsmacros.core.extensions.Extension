@@ -1,0 +1,3 @@
+com.jsmacrosce.jsmacros.luaj.LuajExtension
+com.jsmacrosce.jsmacros.graal.python.PythonExtension
+com.jsmacrosce.jsmacros.multilang.RubyProvider
