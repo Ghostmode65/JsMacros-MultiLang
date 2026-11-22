@@ -3,6 +3,7 @@
   "id": "jsmacros_multilang",
   "version": "@version@",
   "name": "JsMacros Multi-Language",
+  "icon": "logo.png",
   "description": "Shared Lua, Python, and Ruby engines for JsMacros Legacy, Community, and Reloaded",
   "environment": "client",
   "jars": [

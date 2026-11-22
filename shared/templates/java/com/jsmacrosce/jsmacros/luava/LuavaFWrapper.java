@@ -116,6 +116,7 @@ public final class LuavaFWrapper extends PerExecLanguageLibrary<LuavaExecutionSu
         result.rawset(LuaValue.valueOf("error"), info);
         result.rawsetInt(2, info);
         result.rawset(LuaValue.valueOf("message"), LuaDataConverter.toLua(error.getMessage()));
+        result.rawset(LuaValue.valueOf("getString"), result.rawget(LuaValue.valueOf("message")));
         result.rawset(LuaValue.valueOf("handled"), handled == null ? LuaNil.NIL : handled);
         if (handled != null) result.rawsetInt(3, handled);
         return result;
@@ -127,6 +128,7 @@ public final class LuavaFWrapper extends PerExecLanguageLibrary<LuavaExecutionSu
         LuaTable info = new LuaTable();
         info.rawset(LuaValue.valueOf("object"), LuaDataConverter.toLuaLive(error));
         info.rawset(LuaValue.valueOf("message"), LuaDataConverter.toLua(error.getMessage()));
+        info.rawset(LuaValue.valueOf("getString"), info.rawget(LuaValue.valueOf("message")));
         info.rawset(LuaValue.valueOf("errorMessage"), LuaDataConverter.toLua(error.getMessage()));
         Throwable cause = error.getCause();
         info.rawset(LuaValue.valueOf("cause"), LuaDataConverter.toLuaLive(cause));

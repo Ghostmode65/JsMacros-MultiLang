@@ -168,6 +168,7 @@ public class FWrapper extends PerExecLanguageLibrary<Globals, LuajScriptContext>
         table.set("ok", LuaValue.FALSE);
         table.set("error", error);
         table.set("message", helper.getMessage() == null ? LuaValue.NIL : LuaValue.valueOf(helper.getMessage()));
+        table.set("getString", table.get("message"));
         table.set("handled", handled == null ? LuaValue.NIL : handled);
         table.set(1, LuaValue.FALSE);
         table.set(2, error);
@@ -181,6 +182,7 @@ public class FWrapper extends PerExecLanguageLibrary<Globals, LuajScriptContext>
         LuaTable table = LuaValue.tableOf();
         table.set("object", LuaValue.userdataOf(helper));
         table.set("message", helper.getMessage() == null ? LuaValue.NIL : LuaValue.valueOf(helper.getMessage()));
+        table.set("getString", table.get("message"));
         table.set("errorMessage", helper.getErrorMessage() == null ? LuaValue.NIL : LuaValue.valueOf(helper.getErrorMessage()));
         table.set("cause", helper.getCause() == null ? LuaValue.NIL : LuaValue.userdataOf(helper.getCause()));
         table.set("causeClass", helper.getCauseClass() == null ? LuaValue.NIL : LuaValue.valueOf(helper.getCauseClass()));
@@ -199,6 +201,11 @@ public class FWrapper extends PerExecLanguageLibrary<Globals, LuajScriptContext>
 
         public String getMessage() {
             return error.getMessage();
+        }
+
+        /** Compatibility with the Legacy Lua error helper. */
+        public String getString() {
+            return getMessage();
         }
 
         public String getErrorMessage() {

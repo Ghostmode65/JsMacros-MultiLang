@@ -281,6 +281,14 @@ public class LuaRuntimeSmoke {
             """);
         Files.writeString(macros.resolve("chunk-error.lua"), "local value = 1\nerror('expected direct chunk failure')");
         Probe direct = run("""
+            local failed = JavaWrapper:pcall(function() error('expected helper text') end)
+            assert(not failed.ok and type(failed.error.getString) == 'string')
+            assert(string.find(failed.error.getString, 'expected helper text', 1, true))
+            assert(failed.getString == failed.error.getString)
+            if failed.message ~= nil then assert(failed.message == failed.getString) end
+            local handled = JavaWrapper:xpcall(function() error('handled helper text') end,
+                function(errorHelper) return errorHelper.getString end)
+            assert(not handled.ok and string.find(handled.handled, 'handled helper text', 1, true))
             local outerLocal = 99
             event:markJoined()
             assert(JavaWrapper:luava('return 6 * 7') == 42)
