@@ -24,9 +24,13 @@ jython can be enabled in Community and Reloaded, as an experimental over GraalPy
 
 ## Benchmarks
 
-[GraalJS | JavaScript] <br> 
+[GraalJS | JavaScript] (No Graalvm) <br> 
 - Prime (2000): max 430 ms; min 393 ms; average 416 ms
 - getBlock (4 chunks): max 265 ms; min 171 ms; average 191 ms
+
+[GraalJS | JavaScript] (With Graalvm) <br> 
+- Prime (2000): max 36.64 ms; min 26.48 ms; average 30.60 ms
+- getBlock (4 chunks): max 115 ms; min 17.85 ms; average 41.00 ms
 
 [GraalPy | Python 3.10.13] (No Graalvm) <br>  
 - Prime (2000): max 5579 ms; min 5348 ms; average 5496 ms
