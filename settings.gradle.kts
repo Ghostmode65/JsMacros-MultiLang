@@ -7,4 +7,7 @@ pluginManagement {
 
 rootProject.name = "jsmacros-multilang"
 
-include("legacy", "community", "reloaded")
+listOf("legacy", "community", "reloaded").forEach { target ->
+    include(target)
+    project(":$target").projectDir = file("src/$target")
+}

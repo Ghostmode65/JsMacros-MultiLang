@@ -41,7 +41,7 @@ tasks.withType<JavaCompile>().configureEach {
     options.release.set(17)
 }
 sourceSets.named("main") {
-    java.setSrcDirs(listOf(file("shared/src/main/java")))
+    java.setSrcDirs(listOf(file("src/main/java")))
 }
 val embeddedRuntimes = configurations.create("embeddedRuntimes") { isTransitive = false }
 val embeddedGraalRuntimes = configurations.create("embeddedGraalRuntimes")
@@ -56,7 +56,11 @@ dependencies {
     languageMixinTestRuntime("com.google.guava:guava:31.1-jre")
 }
 val compileLanguageMixinTests = tasks.register<JavaCompile>("compileLanguageMixinTests") {
-    source(fileTree("shared/tests/mixin") { include("**/*.java") })
+    source(fileTree("tests/mixin") { include("**/*.java") })
+    onlyIf("mixin test sources are available") {
+        listOf("LanguageMixinTransform.java", "TestMixinService.java", "TestProperties.java")
+            .all { file("tests/mixin/org/jsmacros/multilang/test/$it").isFile }
+    }
     classpath = languageMixinTestRuntime
     destinationDirectory.set(layout.buildDirectory.dir("language-mixin-tests"))
     options.release.set(17)
@@ -69,7 +73,6 @@ dependencies {
     embeddedRuntimes("com.github.wagyourtail.luaj:luaj-jse:${property("luaj_version")}")
     embeddedRuntimes("io.github.kienpc1234:luava:${property("luava_version")}")
     embeddedRuntimes("org.jruby:jruby-complete:${property("jruby_version")}")
-    embeddedRuntimes("org.python:jython-standalone:${property("jython_version")}")
     embeddedRuntimes("org.jetbrains.kotlin:kotlin-stdlib:2.4.0")
     embeddedGraalRuntimes("org.graalvm.polyglot:python-community:${property("graal_version")}")
     embeddedGraalRuntimes("org.graalvm.polyglot:llvm-community:${property("graal_version")}")
@@ -77,7 +80,10 @@ dependencies {
     legacyRubyRuntime("org.jruby:jruby-complete:${property("jruby_legacy_version")}")
 }
 
-listOf("legacy", "community", "reloaded").forEach { evaluationDependsOn(":$it") }
+listOf("legacy", "community", "reloaded").forEach { name ->
+    project(":$name").layout.buildDirectory.set(layout.buildDirectory.dir("editions/$name"))
+    evaluationDependsOn(":$name")
+}
 
 val sharedSourceValues = mapOf(
     "legacy" to mapOf(
@@ -124,9 +130,6 @@ sharedSourceValues.forEach { (targetName, values) ->
     val replacements = mapOf(
         "LUA_RUNNER" to "LuajExtension.RUNNER",
         "LANGUAGE_RUNNER" to if (targetName == "legacy") "Core.getInstance()" else "runner",
-        "PYTHON_CONFIG_PACKAGE" to if (targetName == "legacy") "jython" else "graal.python",
-        "PYTHON_TOGGLE_METHOD" to if (targetName == "legacy") "graal" else "jython",
-        "PYTHON_TOGGLE_FIELD" to if (targetName == "legacy") "useGraalPy" else "useJython",
         "LUAVA_CONTEXT_SUPER" to "runner, event, file",
         "LUAVA_CLOSE_METHOD" to "public void closeContext()",
         "LUAVA_CLOSE_SUPER" to "super.closeContext();",
@@ -137,7 +140,7 @@ sharedSourceValues.forEach { (targetName, values) ->
         "RUBY_ARITY" to "(int) method.arity(thread).getValue()"
     ) + values
     target.tasks.register<Sync>("generateSharedSources") {
-        from(rootProject.file("shared/templates/java")) {
+        from(rootProject.file("src/templates/java")) {
             into("java")
             if (targetName == "legacy") {
                 include("**/LuaMethodWrapper.java", "**/LuajGlobalContextLib.java", "**/LuajConfig.java")
@@ -147,7 +150,7 @@ sharedSourceValues.forEach { (targetName, values) ->
             }
         }
         if (targetName != "legacy") {
-            from(rootProject.file("shared/templates/kotlin")) { into("kotlin") }
+            from(rootProject.file("src/templates/kotlin")) { into("kotlin") }
         }
         into(target.layout.buildDirectory.dir("generated/shared-sources"))
         inputs.properties(replacements)
@@ -169,7 +172,7 @@ val fabricTargets = mapOf(
         "minecraft" to ">=1.19 <1.22", "java" to "17",
         "jrubyVersion" to property("jruby_legacy_version").toString(),
         "loader" to "0.15.0", "registration" to "services",
-        "languages" to "luaj,jython,jruby"
+        "languages" to "luaj,graalpy,jruby"
     ),
     "community" to mapOf(
         "title" to "Community", "corePackage" to "com.jsmacrosce.jsmacros",
@@ -192,7 +195,7 @@ val fabricTargets = mapOf(
 fabricTargets.forEach { (name, settings) ->
     val target = project(":$name")
     target.extensions.extraProperties["fabricSettings"] = settings
-    target.apply(mapOf("from" to rootProject.file("shared/gradle/fabric-mod.gradle.kts")))
+    target.apply(mapOf("from" to rootProject.file("gradle/fabric-mod.gradle.kts")))
     target.tasks.named<ShadowJar>("shadowJar") {
         configurations = emptyList()
         relocate("org.luaj", "org.jsmacros.multilang.runtime.luaj")
@@ -200,7 +203,7 @@ fabricTargets.forEach { (name, settings) ->
 }
 
 extra["fabricTargets"] = fabricTargets
-apply(from = file("shared/gradle/universal-fabric.gradle.kts"))
+apply(from = file("gradle/universal-fabric.gradle.kts"))
 tasks.named<ShadowJar>("shadowJar") {
     configurations = emptyList()
     relocate("org.luaj", "org.jsmacros.multilang.runtime.luaj")
@@ -212,6 +215,7 @@ val distribution = tasks.register<Sync>("distribution") {
     description = "Collects the universal Fabric mod with shared engines and three alternative adapters."
     val jarTask = tasks.named<Jar>("shadowJar")
     dependsOn(jarTask)
+    dependsOn("languageDistribution")
     from(jarTask.flatMap { it.archiveFile })
     into(layout.buildDirectory.dir("dist"))
 }
