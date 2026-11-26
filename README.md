@@ -11,7 +11,7 @@ Reloaded | 26.x
 Language | Bridge Version | Languge Version 
 |-----------|-----------|------------|
 [LuaJ](https://github.com/luaj/luaj) | 3.2 | Lua 5.2 <br>
-[Luava](https://github.com/KienPC1234/luava) | 0.2.5 | 5.4  <br>
+[Luava](https://github.com/KienPC1234/luava) | 0.2.7 | 5.4  <br>
 Luava can be enabled in java versons 21+, as an experimental option over LuaJ .<br> | |
 [JRuby](https://github.com/jruby/jruby) `Java 21+`| 10.1 | Ruby 4.0   <br>
 JRuby `Java 17` | 9.4 | Ruby 3.1  <br> | |
