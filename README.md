@@ -16,9 +16,6 @@ Luava can be enabled in java versons 21+, as an experimental option over LuaJ .<
 [JRuby](https://github.com/jruby/jruby) `Java 21+`| 10.1 | Ruby 4.0   <br>
 JRuby `Java 17` | 9.4 | Ruby 3.1  <br> | |
 [GraalPy](https://github.com/oracle/graalpython)| 24.0.1 | Python 3.10 <br>
-GraalPy can be enabled for legacy, as an experimental over jython.<br> | |
-[jython](https://github.com/jython/jython) | 2.7.2 | Python 2.7
-jython can be enabled in Community and Reloaded, as an experimental over GraalPy| |
 
 
 
@@ -39,10 +36,6 @@ jython can be enabled in Community and Reloaded, as an experimental over GraalPy
 [GraalPy | Python 3.10.13] ([With Graalvm](https://github.com/graalvm/graalvm-ce-builds/releases/)) <br>
 - Prime (2000): max 38.91 ms; min 30.55 ms; average 32.72 ms
 - getBlock (4 chunks): max 78.47 ms; min 50.93 ms; average 61.48 ms
-
-[Jyphon | Python 2.7] <br>
-- Prime (2000): max 7552 ms; min 7064 ms; average 7280 ms
-- getBlock (4 chunks): max 490 ms; min 413 ms; average 430 ms
 
 [JRuby 10.1 | Ruby 4.0.0] <br>
 - Prime (2000): max 2551 ms; min 2386 ms; average 2465 ms
