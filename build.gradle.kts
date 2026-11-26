@@ -168,7 +168,7 @@ sharedSourceValues.forEach { (targetName, values) ->
 val fabricTargets = mapOf(
     "legacy" to mapOf(
         "title" to "Legacy", "corePackage" to "xyz.wagyourtail.jsmacros",
-        "coreId" to "jsmacros", "coreVersion" to ">=1.7.0-0 <2.0.0-0",
+        "coreId" to "jsmacros", "coreVersion" to ">=1.7.0-0 <2.0.0-0", "recommendedCoreVersion" to ">=1.7.0-0 <2.0.0-0",
         "minecraft" to ">=1.19 <1.22", "java" to "17",
         "jrubyVersion" to property("jruby_legacy_version").toString(),
         "loader" to "0.15.0", "registration" to "services",
@@ -176,7 +176,7 @@ val fabricTargets = mapOf(
     ),
     "community" to mapOf(
         "title" to "Community", "corePackage" to "com.jsmacrosce.jsmacros",
-        "coreId" to "jsmacrosce", "coreVersion" to ">=2.0.0-0 <2.1.0-0",
+        "coreId" to "jsmacrosce", "coreVersion" to ">=2.0.0-0", "recommendedCoreVersion" to ">=2.0.0-0 <2.1.0-0",
         "minecraft" to "1.21.8", "java" to "21",
         "jrubyVersion" to property("jruby_version").toString(),
         "loader" to "0.15.0", "registration" to "services",
@@ -184,7 +184,7 @@ val fabricTargets = mapOf(
     ),
     "reloaded" to mapOf(
         "title" to "Reloaded", "corePackage" to "xyz.wagyourtail.jsmacros",
-        "coreId" to "jsmacros", "coreVersion" to ">=2.1.0-0 <3.0.0-0",
+        "coreId" to "jsmacros", "coreVersion" to ">=2.1.0-0", "recommendedCoreVersion" to ">=2.1.0-0 <3.0.0-0",
         "minecraft" to "26.2", "java" to property("java_version").toString(),
         "jrubyVersion" to property("jruby_version").toString(),
         "loader" to "0.19.0", "registration" to "entrypoints",

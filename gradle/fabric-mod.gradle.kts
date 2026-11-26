@@ -86,6 +86,8 @@ tasks.register<Exec>("verifyFabricMod") {
         listOf(
             "tests/FabricModSmoke.java",
             "tests/RubyAdapterSmoke.java",
+            "tests/LuaRuntimeSmoke.java",
+            if (targetName == "legacy") "tests/LegacyPythonSwitchSmoke.java" else "tests/PythonSwitchSmoke.java",
             "tests/mixin/org/jsmacros/multilang/test/LanguageMixinTransform.java",
             "tests/mixin/org/jsmacros/multilang/test/TestMixinService.java",
             "tests/mixin/org/jsmacros/multilang/test/TestProperties.java",

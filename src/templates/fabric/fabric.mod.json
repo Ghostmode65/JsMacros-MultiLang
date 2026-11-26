@@ -15,6 +15,9 @@
     "jsmacros_multilang_jruby": "=@jrubyVersion@",
     "jsmacros_multilang": "=@version@"
   },
+  "recommends": {
+    "@coreId@": "@recommendedCoreVersion@"
+  },
   "breaks": {
     "@otherCoreId@": "*"
   },
